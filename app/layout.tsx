@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ConnectNow",
-  description: "ConnectNow is a lightweight video conferencing platform for seamless virtual meetings. Features include real-time audio/video calls, screen sharing, and chat. Built with modern web technologies for desktop and mobile. Enhance your remote collaboration with ease.",
+  description:
+    "ConnectNow is a lightweight video conferencing platform for seamless virtual meetings. Features include real-time audio/video calls, screen sharing, and chat. Built with modern web technologies for desktop and mobile. Enhance your remote collaboration with ease.",
 };
 
 export default function RootLayout({
@@ -16,7 +18,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-dark-2`}>{children}</body>
+      <ClerkProvider
+      appearance={{
+        layout:{
+          socialButtonsVariant:'iconButton',
+          logoImageUrl:'icons/logo.svg'
+        },
+        variables: {
+          colorText: '#fff',
+          colorPrimary: '#0E78F9',
+          colorBackground: '#1c1f2e',
+          colorInputBackground: '#252a41',
+          colorInputText:'#fff'
+          
+        }
+      }}
+      >
+        <body className={`${inter.className} bg-dark-2`}>{children}</body>
+      </ClerkProvider>
     </html>
   );
 }
