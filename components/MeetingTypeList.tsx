@@ -51,7 +51,7 @@ const MeetingTypeList = () => {
       });
 
       setCallDetails(call);
-      if (!values.description) {
+      if (!values.description && meetingState !== "isScheduleMeeting") {
         router.push(`/meeting/${call.id}`);
       }
       toast({ title: "Meeting created" });
